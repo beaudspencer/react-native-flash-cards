@@ -14,7 +14,7 @@ export default class App extends React.Component {
     const cards = this.state.cards.slice()
     cards.push(card)
     this.setState({
-      cards
+      cards: cards
     })
   }
   render() {
