@@ -28,6 +28,10 @@ export default class CreateCard extends React.Component {
   createCard() {
     const card = Object.assign({}, this.state)
     this.props.handleSubmit(card)
+    this.setState({
+      ques: '',
+      ans: ''
+    })
   }
   render() {
     return (
@@ -61,6 +65,7 @@ export default class CreateCard extends React.Component {
                         ques: text
                       })
                     }}
+                    value={this.state.ques}
                   />
                 </Item>
               </CardItem>
@@ -78,6 +83,7 @@ export default class CreateCard extends React.Component {
                         ans: text
                       })
                     }}
+                    value={this.state.ans}
                   />
                 </Item>
               </CardItem>
