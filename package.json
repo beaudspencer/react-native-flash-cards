@@ -7,13 +7,47 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^31.0.2",
     "native-base": "^2.8.1",
+    "npm": "^6.5.0",
     "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.html": [
+      "htmlhint"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "git add"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "@babel/core": "^7.2.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "babel-preset-expo": "^5.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "expo": "^31.0.2",
+    "htmlhint": "^0.10.1",
+    "husky": "^1.2.1",
+    "install": "^0.12.2",
+    "lint-staged": "^8.1.0",
+    "stylelint": "^9.9.0",
+    "eslint-plugin-import": "2.13.0",
+    "eslint-plugin-node": "7.0.1",
+    "eslint-plugin-promise": "3.8.0",
+    "eslint-plugin-react": "7.10.0",
+    "eslint-plugin-standard": "3.1.0",
+    "stylelint-config-standard": "^18.2.0"
   },
   "private": true
 }
