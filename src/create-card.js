@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-  StyleSheet
+  StyleSheet,
+  Text
 } from 'react-native'
 import {
   Form,
@@ -12,8 +13,7 @@ import {
   Content,
   Card,
   CardItem,
-  Button,
-  Text
+  Button
 } from 'native-base'
 
 export default class CreateCard extends React.Component {
