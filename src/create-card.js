@@ -9,7 +9,6 @@ import {
   Label,
   Item,
   Container,
-  Header,
   Content,
   Card,
   CardItem,
@@ -39,7 +38,6 @@ export default class CreateCard extends React.Component {
       <Container
         style={styles.card}
       >
-        <Header />
         <Content
           padder
         >
