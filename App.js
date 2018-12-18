@@ -12,8 +12,13 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      view: 'create',
-      cards: []
+      view: 'list',
+      cards: [
+        {
+          ans: 'hi',
+          ques: 'bye'
+        }
+      ]
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderView = this.renderView.bind(this)
@@ -44,8 +49,10 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Container>
+      <View style={styles.view}>
+        <Container
+          style={styles.container}
+        >
           <Navi/>
           <Content>
             {this.renderView()}
@@ -57,10 +64,13 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  view: {
     flex: 1,
     backgroundColor: '#E0E0E0',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  container: {
+    width: '100%'
   }
 })
