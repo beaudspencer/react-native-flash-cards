@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import {
-  Content,
-  Container
+  Container,
+  Tabs,
+  Tab
 } from 'native-base'
 import CreateCard from './src/create-card'
 import CardList from './src/card-list'
@@ -12,7 +13,6 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      view: 'list',
       cards: [
         {
           ans: 'hi',
@@ -21,7 +21,6 @@ export default class App extends React.Component {
       ]
     }
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.renderView = this.renderView.bind(this)
   }
   handleSubmit(card) {
     const cards = this.state.cards.slice()
@@ -30,33 +29,30 @@ export default class App extends React.Component {
       cards: cards
     })
   }
-  renderView() {
-    const { view, cards } = this.state
-    if (view === 'create') {
-      return (
-        <CreateCard
-          handleSubmit={this.handleSubmit}
-        />
-      )
-    }
-    else if (view === 'list') {
-      return (
-        <CardList
-          cards={cards}
-        />
-      )
-    }
-  }
   render() {
+    const { cards } = this.state
     return (
       <View style={styles.view}>
         <Container
           style={styles.container}
         >
           <Navi/>
-          <Content>
-            {this.renderView()}
-          </Content>
+          <Tabs>
+            <Tab
+              heading="Cards"
+            >
+              <CardList
+                cards={cards}
+              />
+            </Tab>
+            <Tab
+              heading="New Card"
+            >
+              <CreateCard
+                handleSubmit={this.handleSubmit}
+              />
+            </Tab>
+          </Tabs>
         </Container>
       </View>
     )
