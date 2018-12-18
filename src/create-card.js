@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-  StyleSheet
+  StyleSheet,
+  Text
 } from 'react-native'
 import {
   Form,
@@ -8,12 +9,11 @@ import {
   Label,
   Item,
   Container,
-  Header,
   Content,
   Card,
   CardItem,
   Button,
-  Text
+  H3
 } from 'native-base'
 
 export default class CreateCard extends React.Component {
@@ -38,7 +38,6 @@ export default class CreateCard extends React.Component {
       <Container
         style={styles.card}
       >
-        <Header />
         <Content
           padder
         >
@@ -48,9 +47,9 @@ export default class CreateCard extends React.Component {
                 header
                 bordered
               >
-                <Text>
+                <H3>
                   Create a Flash Card
-                </Text>
+                </H3>
               </CardItem>
               <CardItem>
                 <Item
@@ -91,10 +90,13 @@ export default class CreateCard extends React.Component {
                 style={styles.save}
               >
                 <Button
+                  style={styles.button}
                   primary
                   onPress={this.createCard}
                 >
-                  <Text>
+                  <Text
+                    style={styles.text}
+                  >
                     Save
                   </Text>
                 </Button>
@@ -113,5 +115,11 @@ const styles = StyleSheet.create({
   },
   save: {
     alignSelf: 'flex-end'
+  },
+  button: {
+    paddingHorizontal: 18
+  },
+  text: {
+    color: '#fff'
   }
 })
