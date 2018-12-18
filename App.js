@@ -13,12 +13,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      cards: [
-        {
-          ans: 'hi',
-          ques: 'bye'
-        }
-      ]
+      cards: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
