@@ -15,6 +15,7 @@ export default class Navi extends React.Component {
   render() {
     return (
       <Header
+        hasTabs
         style={styles.navi}
       >
         <Left>
