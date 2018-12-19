@@ -9,6 +9,7 @@ import {
   Tabs,
   Tab
 } from 'native-base'
+import SyncStorage from 'sync-storage'
 import CreateCard from './src/create-card'
 import CardList from './src/card-list'
 import Navi from './src/navi'
@@ -17,9 +18,10 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      cards: []
+      cards: SyncStorage.get('cards') || []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleApp = this.handleApp.bind(this)
   }
   handleSubmit(card) {
     const cards = this.state.cards.slice()
@@ -33,6 +35,13 @@ export default class App extends React.Component {
   }
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleApp)
+  }
+  handleApp(state) {
+    const { cards } = this.state
+    console.log(cards)
+    if (state !== 'active' && cards.length > 1) {
+      SyncStorage.set('cards', JSON.stringify(cards))
+    }
   }
   render() {
     const { cards } = this.state
