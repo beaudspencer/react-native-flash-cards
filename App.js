@@ -1,5 +1,9 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import {
+  StyleSheet,
+  AppState,
+  View
+} from 'react-native'
 import {
   Container,
   Tabs,
@@ -23,6 +27,12 @@ export default class App extends React.Component {
     this.setState({
       cards: cards
     })
+  }
+  componentDidMount() {
+    AppState.addEventListener('change', this.handleApp)
+  }
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this.handleApp)
   }
   render() {
     const { cards } = this.state
