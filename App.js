@@ -2,7 +2,7 @@ import React from 'react'
 import {
   StyleSheet,
   AppState,
-  View
+  ScrollView
 } from 'react-native'
 import {
   Container,
@@ -140,7 +140,10 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <View style={styles.view}>
+      <ScrollView
+        contentContainerstyle={styles.view}
+        keyboardShouldPersistTaps='handled'
+      >
         <Container
           style={styles.container}
         >
@@ -149,7 +152,7 @@ export default class App extends React.Component {
             this.renderTabs()
           }
         </Container>
-      </View>
+      </ScrollView>
     )
   }
 }
