@@ -20,13 +20,20 @@ export default class App extends React.Component {
     this.state = {
       cards: syncStorage.get('cards')
         ? JSON.parse(syncStorage.get('cards'))
-        : [],
+        : [
+          {
+            ans: 'hi',
+            ques: 'bye',
+            id: 0
+          }
+        ],
       currentId: syncStorage.get('currentId')
         ? JSON.parse(syncStorage.get('currentId'))
-        : 0
+        : 1
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleApp = this.handleApp.bind(this)
+    this.editCard = this.editCard.bind(this)
   }
   handleSubmit(card) {
     const { cards, currentId } = this.state
@@ -50,6 +57,8 @@ export default class App extends React.Component {
       syncStorage.set('cards', JSON.stringify(cards))
       syncStorage.set('currentId'.JSON.stringify(currentId))
     }
+  }
+  editCard(card) {
   }
   render() {
     const { cards } = this.state

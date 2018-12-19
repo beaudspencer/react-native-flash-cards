@@ -12,6 +12,14 @@ import {
 } from 'native-base'
 
 export default class FlashCard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.edit = this.edit.bind(this)
+  }
+  edit() {
+    const { card, editCard } = this.props
+    editCard(card)
+  }
   render() {
     const { ques, ans } = this.props.card
     return (
@@ -46,6 +54,7 @@ export default class FlashCard extends React.Component {
           style={stlyes.edit}
         >
           <Button
+            onPress={this.edit}
             transparent
             style={stlyes.button}
           >
