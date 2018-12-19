@@ -21,16 +21,10 @@ export default class App extends React.Component {
       selectedCard: null,
       cards: syncStorage.get('cards')
         ? JSON.parse(syncStorage.get('cards'))
-        : [
-          {
-            ans: 'hi',
-            ques: 'bye',
-            id: 1
-          }
-        ],
+        : [],
       currentId: syncStorage.get('currentId')
         ? JSON.parse(syncStorage.get('currentId'))
-        : 2
+        : 1
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleApp = this.handleApp.bind(this)
