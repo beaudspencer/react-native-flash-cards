@@ -21,7 +21,9 @@ export default class App extends React.Component {
       cards: syncStorage.get('cards')
         ? JSON.parse(syncStorage.get('cards'))
         : [],
-      currentId: 0
+      currentId: syncStorage.get('currentId')
+        ? JSON.parse(syncStorage.get('currentId'))
+        : 0
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleApp = this.handleApp.bind(this)
@@ -43,9 +45,10 @@ export default class App extends React.Component {
     AppState.removeEventListener('change', this.handleApp)
   }
   handleApp(state) {
-    const { cards } = this.state
+    const { cards, currentId } = this.state
     if (state !== 'active' && cards.length > 1) {
       syncStorage.set('cards', JSON.stringify(cards))
+      syncStorage.set('currentId'.JSON.stringify(currentId))
     }
   }
   render() {
