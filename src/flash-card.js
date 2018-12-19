@@ -15,10 +15,15 @@ export default class FlashCard extends React.Component {
   constructor(props) {
     super(props)
     this.edit = this.edit.bind(this)
+    this.delete = this.delete.bind(this)
   }
   edit() {
     const { card, editCard } = this.props
     editCard(card)
+  }
+  delete() {
+    const { card, deleteCard } = this.props
+    deleteCard(card)
   }
   render() {
     const { ques, ans } = this.props.card
@@ -53,6 +58,16 @@ export default class FlashCard extends React.Component {
           footer
           style={stlyes.edit}
         >
+          <Button
+            onPress={this.delete}
+            transparent
+            style={stlyes.button}
+          >
+            <Icon
+              type="FontAwesome"
+              name="minus-circle"
+            />
+          </Button>
           <Button
             onPress={this.edit}
             transparent

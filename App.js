@@ -2,7 +2,7 @@ import React from 'react'
 import {
   StyleSheet,
   AppState,
-  View
+  ScrollView
 } from 'react-native'
 import {
   Container,
@@ -30,6 +30,8 @@ export default class App extends React.Component {
     this.handleApp = this.handleApp.bind(this)
     this.editCard = this.editCard.bind(this)
     this.renderTabs = this.renderTabs.bind(this)
+    this.deleteCard = this.deleteCard.bind(this)
+    this.findCard = this.findCard.bind(this)
   }
   findCard(selCard) {
     const { cards } = this.state
@@ -61,6 +63,23 @@ export default class App extends React.Component {
       selectedCard: null
     })
   }
+  deleteCard(card) {
+    const { cards } = this.state
+    const index = this.findCard(card)
+    if (cards.length === 1) {
+      this.setState({
+        cards: []
+      })
+    }
+    else {
+      const preCards = cards.slice(0, index)
+      const postCards = cards.slice(index + 1)
+      const newCards = [...preCards, ...postCards]
+      this.setState({
+        cards: newCards
+      })
+    }
+  }
   componentDidMount() {
     AppState.addEventListener('change', this.handleApp)
   }
@@ -69,7 +88,7 @@ export default class App extends React.Component {
   }
   handleApp(state) {
     const { cards, currentId } = this.state
-    if (state !== 'active' && cards.length > 1) {
+    if (state !== 'active' && cards.length >= 1) {
       syncStorage.set('cards', JSON.stringify(cards))
       syncStorage.set('currentId'.JSON.stringify(currentId))
     }
@@ -102,6 +121,7 @@ export default class App extends React.Component {
             heading="Cards"
           >
             <CardList
+              deleteCard={this.deleteCard}
               editCard={this.editCard}
               cards={cards}
             />
@@ -120,7 +140,10 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <View style={styles.view}>
+      <ScrollView
+        contentContainerstyle={styles.view}
+        keyboardShouldPersistTaps='handled'
+      >
         <Container
           style={styles.container}
         >
@@ -129,7 +152,7 @@ export default class App extends React.Component {
             this.renderTabs()
           }
         </Container>
-      </View>
+      </ScrollView>
     )
   }
 }

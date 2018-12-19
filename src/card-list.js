@@ -11,7 +11,7 @@ import FlashCard from './flash-card'
 
 export default class CardList extends React.Component {
   render() {
-    const { cards, editCard } = this.props
+    const { cards, editCard, deleteCard } = this.props
     return (
       <Container
         style={styles.view}
@@ -24,7 +24,8 @@ export default class CardList extends React.Component {
               ? cards.map((card, index) => {
                 return (
                   <FlashCard
-                    key={index}
+                    key={card.id}
+                    deleteCard={deleteCard}
                     editCard={editCard}
                     card={card}
                   />
