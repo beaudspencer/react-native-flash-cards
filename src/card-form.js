@@ -27,9 +27,6 @@ export default class CardForm extends React.Component {
       : this.props.card
     this.createCard = this.createCard.bind(this)
   }
-  handleSubmit() {
-
-  }
   createCard() {
     const card = Object.assign({}, this.state)
     this.props.handleSubmit(card)
