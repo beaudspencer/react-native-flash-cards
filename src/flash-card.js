@@ -54,6 +54,15 @@ export default class FlashCard extends React.Component {
           style={stlyes.edit}
         >
           <Button
+            transparent
+            style={stlyes.button}
+          >
+            <Icon
+              type="FontAwesome"
+              name="minus-circle"
+            />
+          </Button>
+          <Button
             onPress={this.edit}
             transparent
             style={stlyes.button}

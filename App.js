@@ -61,6 +61,23 @@ export default class App extends React.Component {
       selectedCard: null
     })
   }
+  deleteCard(card) {
+    const { cards } = this.state
+    const index = this.findCard(card)
+    if (cards.length === 1) {
+      this.setState({
+        cards: []
+      })
+    }
+    else {
+      const preCards = cards.slice(0, index)
+      const postCards = cards.slice(index + 1)
+      const newCards = [...preCards, ...postCards]
+      this.setState({
+        cards: newCards
+      })
+    }
+  }
   componentDidMount() {
     AppState.addEventListener('change', this.handleApp)
   }
