@@ -38,7 +38,6 @@ export default class App extends React.Component {
   }
   handleApp(state) {
     const { cards } = this.state
-    console.log(cards)
     if (state !== 'active' && cards.length > 1) {
       SyncStorage.set('cards', JSON.stringify(cards))
     }
