@@ -30,6 +30,8 @@ export default class App extends React.Component {
     this.handleApp = this.handleApp.bind(this)
     this.editCard = this.editCard.bind(this)
     this.renderTabs = this.renderTabs.bind(this)
+    this.deleteCard = this.deleteCard.bind(this)
+    this.findCard = this.findCard.bind(this)
   }
   findCard(selCard) {
     const { cards } = this.state
@@ -86,7 +88,7 @@ export default class App extends React.Component {
   }
   handleApp(state) {
     const { cards, currentId } = this.state
-    if (state !== 'active' && cards.length > 1) {
+    if (state !== 'active' && cards.length >= 1) {
       syncStorage.set('cards', JSON.stringify(cards))
       syncStorage.set('currentId'.JSON.stringify(currentId))
     }
@@ -119,6 +121,7 @@ export default class App extends React.Component {
             heading="Cards"
           >
             <CardList
+              deleteCard={this.deleteCard}
               editCard={this.editCard}
               cards={cards}
             />
