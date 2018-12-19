@@ -16,14 +16,19 @@ import {
   H3
 } from 'native-base'
 
-export default class CreateCard extends React.Component {
+export default class CardForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      ques: '',
-      ans: ''
-    }
+    this.state = !this.props.card
+      ? {
+        ques: '',
+        ans: ''
+      }
+      : this.props.card
     this.createCard = this.createCard.bind(this)
+  }
+  handleSubmit() {
+
   }
   createCard() {
     const card = Object.assign({}, this.state)
@@ -34,6 +39,7 @@ export default class CreateCard extends React.Component {
     })
   }
   render() {
+    const { card } = this.props
     return (
       <Container
         style={styles.card}
@@ -48,7 +54,11 @@ export default class CreateCard extends React.Component {
                 bordered
               >
                 <H3>
-                  Create a Flash Card
+                  {
+                    card
+                      ? 'Edit Card'
+                      : 'Create A Flash Card'
+                  }
                 </H3>
               </CardItem>
               <CardItem>
