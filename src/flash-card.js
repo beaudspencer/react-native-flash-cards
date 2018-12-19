@@ -6,10 +6,20 @@ import {
 import {
   Card,
   CardItem,
+  Icon,
+  Button,
   H3
 } from 'native-base'
 
 export default class FlashCard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.edit = this.edit.bind(this)
+  }
+  edit() {
+    const { card, editCard } = this.props
+    editCard(card)
+  }
   render() {
     const { ques, ans } = this.props.card
     return (
@@ -38,6 +48,22 @@ export default class FlashCard extends React.Component {
             {ans}
           </Text>
         </CardItem>
+        <CardItem
+          bordered
+          footer
+          style={stlyes.edit}
+        >
+          <Button
+            onPress={this.edit}
+            transparent
+            style={stlyes.button}
+          >
+            <Icon
+              type="FontAwesome"
+              name="edit"
+            />
+          </Button>
+        </CardItem>
       </Card>
     )
   }
@@ -46,5 +72,10 @@ export default class FlashCard extends React.Component {
 const stlyes = StyleSheet.create({
   text: {
     fontSize: 16
+  },
+  edit: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'flex-end'
   }
 })

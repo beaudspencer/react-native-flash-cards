@@ -9,8 +9,8 @@ import {
   Tabs,
   Tab
 } from 'native-base'
-import SyncStorage from 'sync-storage'
-import CreateCard from './src/create-card'
+import syncStorage from 'sync-storage'
+import CardForm from './src/card-form'
 import CardList from './src/card-list'
 import Navi from './src/navi'
 
@@ -18,16 +18,47 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      cards: SyncStorage.get('cards') || []
+      selectedCard: null,
+      cards: syncStorage.get('cards')
+        ? JSON.parse(syncStorage.get('cards'))
+        : [],
+      currentId: syncStorage.get('currentId')
+        ? JSON.parse(syncStorage.get('currentId'))
+        : 1
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleApp = this.handleApp.bind(this)
+    this.editCard = this.editCard.bind(this)
+    this.renderTabs = this.renderTabs.bind(this)
+  }
+  findCard(selCard) {
+    const { cards } = this.state
+    const index = cards.findIndex(card => {
+      return card.id === selCard.id
+    })
+    return index
   }
   handleSubmit(card) {
-    const cards = this.state.cards.slice()
-    cards.push(card)
+    const { cards, currentId } = this.state
+    let newCards = null
+    if (card.id && cards.length > 1) {
+      const index = this.findCard(card)
+      const preCards = cards.slice(0, index)
+      const postCards = cards.slice(index + 1)
+      newCards = [...preCards, card, ...postCards]
+    }
+    else if (card.id && cards.length === 1) {
+      newCards = [card]
+    }
+    else {
+      newCards = cards.slice()
+      card.id = currentId
+      newCards.push(card)
+    }
     this.setState({
-      cards: cards
+      cards: newCards,
+      currentId: currentId + 1,
+      selectedCard: null
     })
   }
   componentDidMount() {
@@ -37,35 +68,66 @@ export default class App extends React.Component {
     AppState.removeEventListener('change', this.handleApp)
   }
   handleApp(state) {
-    const { cards } = this.state
+    const { cards, currentId } = this.state
     if (state !== 'active' && cards.length > 1) {
-      SyncStorage.set('cards', JSON.stringify(cards))
+      syncStorage.set('cards', JSON.stringify(cards))
+      syncStorage.set('currentId'.JSON.stringify(currentId))
+    }
+  }
+  editCard(card) {
+    this.setState({
+      selectedCard: card
+    })
+  }
+  renderTabs() {
+    const { cards, selectedCard } = this.state
+    if (selectedCard) {
+      return (
+        <Tabs>
+          <Tab
+            heading="Edit Card"
+          >
+            <CardForm
+              card={this.state.selectedCard}
+              handleSubmit={this.handleSubmit}
+            />
+          </Tab>
+        </Tabs>
+      )
+    }
+    else {
+      return (
+        <Tabs>
+          <Tab
+            heading="Cards"
+          >
+            <CardList
+              editCard={this.editCard}
+              cards={cards}
+            />
+          </Tab>
+          <Tab
+            heading="New Card"
+          >
+            <CardForm
+              card={selectedCard}
+              handleSubmit={this.handleSubmit}
+            />
+          </Tab>
+        </Tabs>
+      )
     }
   }
   render() {
-    const { cards } = this.state
     return (
       <View style={styles.view}>
         <Container
           style={styles.container}
         >
           <Navi/>
-          <Tabs>
-            <Tab
-              heading="Cards"
-            >
-              <CardList
-                cards={cards}
-              />
-            </Tab>
-            <Tab
-              heading="New Card"
-            >
-              <CreateCard
-                handleSubmit={this.handleSubmit}
-              />
-            </Tab>
-          </Tabs>
+          {
+            this.renderTabs()
+          }
         </Container>
       </View>
     )
