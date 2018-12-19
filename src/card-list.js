@@ -24,7 +24,7 @@ export default class CardList extends React.Component {
               ? cards.map((card, index) => {
                 return (
                   <FlashCard
-                    key={index}
+                    key={card.id}
                     editCard={editCard}
                     card={card}
                   />
