@@ -6,6 +6,8 @@ import {
 import {
   Card,
   CardItem,
+  Icon,
+  Button,
   H3
 } from 'native-base'
 
@@ -38,6 +40,21 @@ export default class FlashCard extends React.Component {
             {ans}
           </Text>
         </CardItem>
+        <CardItem
+          bordered
+          footer
+          style={stlyes.edit}
+        >
+          <Button
+            transparent
+            style={stlyes.button}
+          >
+            <Icon
+              type="FontAwesome"
+              name="edit"
+            />
+          </Button>
+        </CardItem>
       </Card>
     )
   }
@@ -46,5 +63,10 @@ export default class FlashCard extends React.Component {
 const stlyes = StyleSheet.create({
   text: {
     fontSize: 16
+  },
+  edit: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'flex-end'
   }
 })
