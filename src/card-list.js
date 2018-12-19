@@ -4,7 +4,8 @@ import {
 } from 'react-native'
 import {
   Container,
-  Content
+  Content,
+  H3
 } from 'native-base'
 import FlashCard from './flash-card'
 
@@ -19,14 +20,18 @@ export default class CardList extends React.Component {
           padder
         >
           {
-            cards.map((card, index) => {
-              return (
-                <FlashCard
-                  key={index}
-                  card={card}
-                />
-              )
-            })
+            cards.length > 1
+              ? cards.map((card, index) => {
+                return (
+                  <FlashCard
+                    key={index}
+                    card={card}
+                  />
+                )
+              })
+              : <H3
+                style={styles.guard}
+              >No Cards Saved</H3>
           }
         </Content>
       </Container>
@@ -37,5 +42,9 @@ export default class CardList extends React.Component {
 const styles = StyleSheet.create({
   view: {
     width: '100%'
+  },
+  guard: {
+    paddingTop: 16,
+    alignSelf: 'center'
   }
 })
