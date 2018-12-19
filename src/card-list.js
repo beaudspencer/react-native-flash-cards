@@ -20,7 +20,7 @@ export default class CardList extends React.Component {
           padder
         >
           {
-            cards.length > 1
+            cards.length >= 1
               ? cards.map((card, index) => {
                 return (
                   <FlashCard
