@@ -1,7 +1,8 @@
 import React from 'react'
 import {
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native'
 import {
   Card,
@@ -27,14 +28,17 @@ export default class PracticeCard extends React.Component {
     return (
       <TouchableOpacity
         onPress={this.flip}
+        style={styles.card}
       >
-        <Card>
+        <Card
+          style={styles.card}
+        >
           <CardItem>
             <H3
               style={styles.content}
             >
               {
-                !this.state.view
+                !this.state.answer
                   ? card.ques
                   : card.ans
               }
@@ -46,7 +50,13 @@ export default class PracticeCard extends React.Component {
   }
 }
 
+const deviceWidth = Dimensions.get('window').width
+
 const styles = StyleSheet.create({
+  card: {
+    height: '92%',
+    width: deviceWidth
+  },
   content: {
     alignSelf: 'center'
   }
