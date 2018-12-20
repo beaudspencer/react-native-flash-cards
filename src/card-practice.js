@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-  ScrollView
+  ScrollView,
+  StyleSheet
 } from 'react-native'
 import PracticeCard from './practice-card'
 
@@ -10,13 +11,17 @@ export default class CardPractice extends React.Component {
     return (
       <ScrollView
         horizontal
-        pagingEnabled
         showsHorizontalScrollIndicator={false}
+        pagingEnabled
+        style={styles.container}
       >
         {
           cards.map(card => {
             return (
-              <PracticeCard key={card.id} card={card}/>
+              <PracticeCard
+                key={card.id}
+                card={card}
+              />
             )
           })
         }
@@ -24,3 +29,10 @@ export default class CardPractice extends React.Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    alignContent: 'center'
+  }
+})
