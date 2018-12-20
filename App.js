@@ -13,6 +13,7 @@ import syncStorage from 'sync-storage'
 import CardForm from './src/card-form'
 import CardList from './src/card-list'
 import Navi from './src/navi'
+import CardPractice from './src/card-practice'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -116,7 +117,9 @@ export default class App extends React.Component {
     }
     else {
       return (
-        <Tabs>
+        <Tabs
+          locked
+        >
           <Tab
             heading="Cards"
           >
@@ -132,6 +135,14 @@ export default class App extends React.Component {
             <CardForm
               card={selectedCard}
               handleSubmit={this.handleSubmit}
+            />
+          </Tab>
+          <Tab
+            heading="Practice"
+          >
+            <CardPractice
+              style={styles.container}
+              cards={cards}
             />
           </Tab>
         </Tabs>
