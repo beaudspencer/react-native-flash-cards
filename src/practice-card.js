@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native'
 import {
   Card,
@@ -12,25 +13,35 @@ export default class PracticeCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      view: 'question'
+      answer: false
     }
+    this.flip = this.flip.bind(this)
+  }
+  flip() {
+    this.setState({
+      answer: !this.state.answer
+    })
   }
   render() {
     const { card } = this.props
     return (
-      <Card>
-        <CardItem>
-          <H3
-            style={styles.content}
-          >
-            {
-              this.state.view === 'question'
-                ? card.ques
-                : card.ans
-            }
-          </H3>
-        </CardItem>
-      </Card>
+      <TouchableOpacity
+        onPress={this.flip}
+      >
+        <Card>
+          <CardItem>
+            <H3
+              style={styles.content}
+            >
+              {
+                !this.state.view
+                  ? card.ques
+                  : card.ans
+              }
+            </H3>
+          </CardItem>
+        </Card>
+      </TouchableOpacity>
     )
   }
 }
