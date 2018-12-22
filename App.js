@@ -145,15 +145,15 @@ export default class App extends React.Component {
           <Tab
             heading="Practice"
           >
-            <CardPractice
-              style={styles.container}
-              cards={cards}
-            />
             <H3
               style={styles.text}
             >
               Swipe to go through cards
             </H3>
+            <CardPractice
+              style={styles.container}
+              cards={cards}
+            />
             <H3
               style={styles.text}
             >
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height
   },
   text: {
-    marginBottom: 16,
+    marginVertical: 16,
     alignSelf: 'center'
   }
 })
