@@ -2,17 +2,20 @@ import React from 'react'
 import {
   StyleSheet,
   AppState,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native'
 import {
   Container,
   Tabs,
-  Tab
+  Tab,
+  H3
 } from 'native-base'
 import syncStorage from 'sync-storage'
 import CardForm from './src/card-form'
 import CardList from './src/card-list'
 import Navi from './src/navi'
+import CardPractice from './src/card-practice'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -102,7 +105,9 @@ export default class App extends React.Component {
     const { cards, selectedCard } = this.state
     if (selectedCard) {
       return (
-        <Tabs>
+        <Tabs
+          tabBarPosition="overlayBottom"
+        >
           <Tab
             heading="Edit Card"
           >
@@ -116,7 +121,10 @@ export default class App extends React.Component {
     }
     else {
       return (
-        <Tabs>
+        <Tabs
+          tabBarPosition="overlayBottom"
+          locked
+        >
           <Tab
             heading="Cards"
           >
@@ -133,6 +141,24 @@ export default class App extends React.Component {
               card={selectedCard}
               handleSubmit={this.handleSubmit}
             />
+          </Tab>
+          <Tab
+            heading="Practice"
+          >
+            <H3
+              style={styles.text}
+            >
+              Swipe to go through cards
+            </H3>
+            <CardPractice
+              style={styles.container}
+              cards={cards}
+            />
+            <H3
+              style={styles.text}
+            >
+              Tap to flip card
+            </H3>
           </Tab>
         </Tabs>
       )
@@ -165,6 +191,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   container: {
-    width: '100%'
+    width: '100%',
+    height: Dimensions.get('window').height
+  },
+  text: {
+    marginVertical: 16,
+    alignSelf: 'center'
   }
 })
