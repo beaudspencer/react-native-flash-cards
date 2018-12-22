@@ -54,11 +54,12 @@ export default class CardPractice extends React.Component {
 const styles = StyleSheet.create({
   view: {
     width: '100%',
+    marginTop: '40%',
     alignContent: 'center'
   },
   container: {
     width: Dimensions.get('window').width,
-    paddingTop: 16
+    paddingTop: '50%'
   },
   text: {
     alignSelf: 'center'
