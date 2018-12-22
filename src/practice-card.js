@@ -7,7 +7,9 @@ import {
 import {
   Card,
   CardItem,
-  H3
+  H3,
+  Container,
+  Content
 } from 'native-base'
 
 export default class PracticeCard extends React.Component {
@@ -26,26 +28,34 @@ export default class PracticeCard extends React.Component {
   render() {
     const { card } = this.props
     return (
-      <TouchableOpacity
-        onPress={this.flip}
-        style={styles.card}
+      <Container
+        style={styles.container}
       >
-        <Card
-          style={styles.card}
+        <Content
+          padder
         >
-          <CardItem>
-            <H3
-              style={styles.content}
+          <TouchableOpacity
+            onPress={this.flip}
+            style={styles.card}
+          >
+            <Card
+              style={styles.card}
             >
-              {
-                !this.state.answer
-                  ? card.ques
-                  : card.ans
-              }
-            </H3>
-          </CardItem>
-        </Card>
-      </TouchableOpacity>
+              <CardItem
+                style={styles.item}
+              >
+                <H3>
+                  {
+                    !this.state.answer
+                      ? card.ques
+                      : card.ans
+                  }
+                </H3>
+              </CardItem>
+            </Card>
+          </TouchableOpacity>
+        </Content>
+      </Container>
     )
   }
 }
@@ -54,10 +64,15 @@ const deviceWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   card: {
-    height: '92%',
+    height: 240,
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%'
+  },
+  container: {
     width: deviceWidth
   },
-  content: {
+  item: {
     alignSelf: 'center'
   }
 })
