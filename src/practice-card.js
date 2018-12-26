@@ -13,20 +13,8 @@ import {
 } from 'native-base'
 
 export default class PracticeCard extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      answer: false
-    }
-    this.flip = this.flip.bind(this)
-  }
-  flip() {
-    this.setState({
-      answer: !this.state.answer
-    })
-  }
   render() {
-    const { card } = this.props
+    const { card, answer, flip } = this.props
     return (
       <Container
         style={styles.container}
@@ -35,7 +23,7 @@ export default class PracticeCard extends React.Component {
           padder
         >
           <TouchableOpacity
-            onPress={this.flip}
+            onPress={flip}
             style={styles.card}
           >
             <Card
@@ -46,7 +34,7 @@ export default class PracticeCard extends React.Component {
               >
                 <H3>
                   {
-                    this.state.answer
+                    answer
                       ? 'Answer:'
                       : 'Question:'
                   }
@@ -57,7 +45,7 @@ export default class PracticeCard extends React.Component {
               >
                 <H3>
                   {
-                    !this.state.answer
+                    answer
                       ? card.ques
                       : card.ans
                   }
