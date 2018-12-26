@@ -35,7 +35,7 @@ export default class App extends React.Component {
     this.renderTabs = this.renderTabs.bind(this)
     this.deleteCard = this.deleteCard.bind(this)
     this.findCard = this.findCard.bind(this)
-    this.update = this.updateIndex.bind(this)
+    this.updateIndex = this.updateIndex.bind(this)
   }
   findCard(selCard) {
     const { cards } = this.state
@@ -169,6 +169,7 @@ export default class App extends React.Component {
               Swipe right for pass and left for fail
             </H3>
             <CardPractice
+              update={this.updateIndex}
               style={styles.container}
               cards={cards}
             />
