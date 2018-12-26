@@ -31,10 +31,10 @@ export default class CardPractice extends React.Component {
                 )
               }}
               onSwipeLeft={(card) => {
-                update(false, card.id)
+                update(false, card)
               }}
               onSwipeRight={(card) => {
-                update(true, card.id)
+                update(true, card)
               }}
             />
             : (
