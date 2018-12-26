@@ -13,6 +13,18 @@ import {
 import PracticeCard from './practice-card'
 
 export default class CardPractice extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      answer: false
+    }
+    this.flip = this.flip.bind(this)
+  }
+  flip() {
+    this.setState({
+      answer: !this.state.answer
+    })
+  }
   render() {
     const { cards, update } = this.props
     return (
@@ -26,15 +38,23 @@ export default class CardPractice extends React.Component {
               renderItem={item => {
                 return (
                   <PracticeCard
+                    flip={this.flip}
+                    answer={this.state.answer}
                     card={item}
                   />
                 )
               }}
               onSwipeLeft={(card) => {
                 update(false, card)
+                this.setState({
+                  answer: false
+                })
               }}
               onSwipeRight={(card) => {
                 update(true, card)
+                this.setState({
+                  answer: false
+                })
               }}
             />
             : (
