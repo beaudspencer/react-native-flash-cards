@@ -13,9 +13,12 @@ import {
 import PracticeCard from './practice-card'
 
 export default class CardPractice extends React.Component {
+  update(direction) {
+    const { updateIndex } = this.props
+    updateIndex(direction)
+  }
   render() {
     const { cards } = this.props
-
     return (
       <View
         style={styles.view}
@@ -30,6 +33,12 @@ export default class CardPractice extends React.Component {
                     card={item}
                   />
                 )
+              }}
+              onSwipeLeft={() => {
+                this.update(false)
+              }}
+              onSwipeRight={() => {
+                this.update(true)
               }}
             />
             : (
