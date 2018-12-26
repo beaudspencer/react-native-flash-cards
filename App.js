@@ -166,7 +166,7 @@ export default class App extends React.Component {
             <H3
               style={styles.text}
             >
-              Swipe to go through cards
+              Swipe right for pass and left for fail
             </H3>
             <CardPractice
               style={styles.container}
