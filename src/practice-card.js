@@ -46,6 +46,17 @@ export default class PracticeCard extends React.Component {
               >
                 <H3>
                   {
+                    this.state.answer
+                      ? 'Answer:'
+                      : 'Question:'
+                  }
+                </H3>
+              </CardItem>
+              <CardItem
+                style={styles.item}
+              >
+                <H3>
+                  {
                     !this.state.answer
                       ? card.ques
                       : card.ans
