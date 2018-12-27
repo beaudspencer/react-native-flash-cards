@@ -35,6 +35,7 @@ export default class App extends React.Component {
     this.renderTabs = this.renderTabs.bind(this)
     this.deleteCard = this.deleteCard.bind(this)
     this.findCard = this.findCard.bind(this)
+    this.updateIndex = this.updateIndex.bind(this)
   }
   findCard(selCard) {
     const { cards } = this.state
@@ -42,6 +43,23 @@ export default class App extends React.Component {
       return card.id === selCard.id
     })
     return index
+  }
+  updateIndex(passed, card) {
+    const { cards } = this.state
+    const index = this.findCard(card)
+    const updatedCard = Object.assign({}, card)
+    if (passed) {
+      updatedCard.PFIndex++
+    }
+    else {
+      updatedCard.PFIndex = 0
+    }
+    const preCards = cards.slice(0, index)
+    const postCards = cards.slice(index + 1)
+    const newCards = [...preCards, updatedCard, ...postCards]
+    this.setState({
+      cards: newCards
+    })
   }
   handleSubmit(card) {
     const { cards, currentId } = this.state
@@ -148,9 +166,10 @@ export default class App extends React.Component {
             <H3
               style={styles.text}
             >
-              Swipe to go through cards
+              Swipe right for pass and left for fail
             </H3>
             <CardPractice
+              update={this.updateIndex}
               style={styles.container}
               cards={cards}
             />

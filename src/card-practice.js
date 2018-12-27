@@ -1,44 +1,69 @@
 import React from 'react'
 import {
-  ScrollView,
+  View,
   StyleSheet,
   Dimensions
 } from 'react-native'
 import {
   Container,
   Content,
-  H3
+  H3,
+  DeckSwiper
 } from 'native-base'
 import PracticeCard from './practice-card'
 
 export default class CardPractice extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      answer: false
+    }
+    this.flip = this.flip.bind(this)
+  }
+  flip() {
+    this.setState({
+      answer: !this.state.answer
+    })
+  }
   render() {
-    const { cards } = this.props
-
+    const { cards, update } = this.props
     return (
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
+      <View
         style={styles.view}
       >
         {
           cards.length >= 1
-            ? cards.map(card => {
-              return (
-                <PracticeCard
-                  key={card.id}
-                  card={card}
-                />
-              )
-            })
+            ? <DeckSwiper
+              dataSource={cards}
+              renderItem={item => {
+                return (
+                  <PracticeCard
+                    flip={this.flip}
+                    answer={this.state.answer}
+                    card={item}
+                  />
+                )
+              }}
+              onSwipeLeft={(card) => {
+                update(false, card)
+                this.setState({
+                  answer: false
+                })
+              }}
+              onSwipeRight={(card) => {
+                update(true, card)
+                this.setState({
+                  answer: false
+                })
+              }}
+            />
             : (
               <Container
                 style={styles.container}
               >
                 <Content>
                   <H3
-                    style={styles.text}
+                    style={styles.center}
                   >
                   No cards to practice!
                   </H3>
@@ -46,22 +71,21 @@ export default class CardPractice extends React.Component {
               </Container>
             )
         }
-      </ScrollView>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
   view: {
-    width: '100%',
-    marginTop: '40%',
-    alignContent: 'center'
+    marginTop: 120,
+    marginBottom: 194,
+    height: 240
   },
   container: {
-    width: Dimensions.get('window').width,
-    paddingTop: '50%'
+    width: Dimensions.get('window').width
   },
-  text: {
+  center: {
     alignSelf: 'center'
   }
 })
