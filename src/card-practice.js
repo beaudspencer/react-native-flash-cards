@@ -17,13 +17,24 @@ export default class CardPractice extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      answer: false
+      answer: false,
+      progress: 0
     }
     this.flip = this.flip.bind(this)
+    this.calcPrecent = this.calcPrecent.bind(this)
   }
   flip() {
     this.setState({
       answer: !this.state.answer
+    })
+  }
+  calcPrecent(card) {
+    const { cards } = this.props
+    const length = cards.length
+    const index = cards.findIndex(element => element.id === card.id)
+    const percent = ((index + 1) / length)
+    this.setState({
+      progress: percent
     })
   }
   render() {
