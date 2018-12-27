@@ -18,7 +18,7 @@ export default class CardPractice extends React.Component {
     super(props)
     this.state = {
       answer: false,
-      progress: 0
+      progress: 1 / this.props.cards.length
     }
     this.flip = this.flip.bind(this)
     this.calcPercent = this.calcPercent.bind(this)
