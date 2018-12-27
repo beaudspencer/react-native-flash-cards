@@ -11,6 +11,7 @@ import {
   DeckSwiper
 } from 'native-base'
 import PracticeCard from './practice-card'
+import ProgressBar from './progress-bar'
 
 export default class CardPractice extends React.Component {
   constructor(props) {
@@ -33,30 +34,35 @@ export default class CardPractice extends React.Component {
       >
         {
           cards.length >= 1
-            ? <DeckSwiper
-              dataSource={cards}
-              renderItem={item => {
-                return (
-                  <PracticeCard
-                    flip={this.flip}
-                    answer={this.state.answer}
-                    card={item}
-                  />
-                )
-              }}
-              onSwipeLeft={(card) => {
-                update(false, card)
-                this.setState({
-                  answer: false
-                })
-              }}
-              onSwipeRight={(card) => {
-                update(true, card)
-                this.setState({
-                  answer: false
-                })
-              }}
-            />
+            ? (
+              <React.Fragment>
+                <DeckSwiper
+                  dataSource={cards}
+                  renderItem={item => {
+                    return (
+                      <PracticeCard
+                        flip={this.flip}
+                        answer={this.state.answer}
+                        card={item}
+                      />
+                    )
+                  }}
+                  onSwipeLeft={(card) => {
+                    update(false, card)
+                    this.setState({
+                      answer: false
+                    })
+                  }}
+                  onSwipeRight={(card) => {
+                    update(true, card)
+                    this.setState({
+                      answer: false
+                    })
+                  }}
+                />
+                <ProgressBar/>
+              </React.Fragment>
+            )
             : (
               <Container
                 style={styles.container}
