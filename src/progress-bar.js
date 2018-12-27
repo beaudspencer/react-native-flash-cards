@@ -5,6 +5,7 @@ import {
 
 export default class ProgressBar extends React.Component {
   render() {
+    const { progress } = this.props
     return (
       <View
         style={{
@@ -15,7 +16,7 @@ export default class ProgressBar extends React.Component {
       >
         <View
           style={{
-            width: '20%',
+            width: `${progress}%`,
             height: '100%',
             backgroundColor: '#00f'
           }}
