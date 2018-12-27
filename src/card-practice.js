@@ -18,7 +18,7 @@ export default class CardPractice extends React.Component {
     super(props)
     this.state = {
       answer: false,
-      progress: 1 / this.props.cards.length
+      progress: (1 / this.props.cards.length) * 100
     }
     this.flip = this.flip.bind(this)
     this.calcPercent = this.calcPercent.bind(this)
@@ -32,13 +32,13 @@ export default class CardPractice extends React.Component {
     const { cards } = this.props
     const length = cards.length
     const index = cards.findIndex(element => element.id === card.id)
-    const percent = ((index + 1) / length)
+    const percent = ((index + 1) / length) * 100
     this.setState({
       progress: percent
     })
   }
   render() {
-    const { cards, update, calcPercent } = this.props
+    const { cards, update } = this.props
     return (
       <View
         style={styles.view}
@@ -63,17 +63,19 @@ export default class CardPractice extends React.Component {
                     this.setState({
                       answer: false
                     })
-                    calcPercent(card)
+                    this.calcPercent(card)
                   }}
                   onSwipeRight={(card) => {
                     update(true, card)
                     this.setState({
                       answer: false
                     })
-                    calcPercent(card)
+                    this.calcPercent(card)
                   }}
                 />
-                <ProgressBar/>
+                <ProgressBar
+                  progress={this.state.progress}
+                />
               </React.Fragment>
             )
             : (
