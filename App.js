@@ -166,21 +166,23 @@ export default class App extends React.Component {
           <Tab
             heading="Practice"
           >
-            <H3
-              style={styles.text}
-            >
-              Swipe right for pass and left for fail
-            </H3>
-            <CardPractice
-              update={this.updateIndex}
-              style={styles.container}
-              cards={cards}
-            />
-            <H3
-              style={styles.text}
-            >
-              Tap to flip card
-            </H3>
+            <Container>
+              <H3
+                style={styles.text}
+              >
+                Swipe right for pass and left for fail
+              </H3>
+              <CardPractice
+                update={this.updateIndex}
+                style={styles.container}
+                cards={cards}
+              />
+              <H3
+                style={styles.text}
+              >
+                Tap to flip card
+              </H3>
+            </Container>
           </Tab>
         </Tabs>
       )
