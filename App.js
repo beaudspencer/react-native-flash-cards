@@ -1,16 +1,19 @@
 import React from 'react'
 import {
   StyleSheet,
-  AppState,
   ScrollView,
-  Dimensions
+  Dimensions,
+  AppState
 } from 'react-native'
 import {
+  StyleProvider,
   Container,
   Tabs,
   Tab,
   H3
 } from 'native-base'
+import getTheme from './native-base-theme/components'
+import material from './native-base-theme/variables/material'
 import syncStorage from 'sync-storage'
 import CardForm from './src/card-form'
 import CardList from './src/card-list'
@@ -189,14 +192,18 @@ export default class App extends React.Component {
         contentContainerstyle={styles.view}
         keyboardShouldPersistTaps='handled'
       >
-        <Container
-          style={styles.container}
+        <StyleProvider
+          style={getTheme(material)}
         >
-          <Navi/>
-          {
-            this.renderTabs()
-          }
-        </Container>
+          <Container
+            style={styles.container}
+          >
+            <Navi/>
+            {
+              this.renderTabs()
+            }
+          </Container>
+        </StyleProvider>
       </ScrollView>
     )
   }
