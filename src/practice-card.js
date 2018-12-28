@@ -45,7 +45,7 @@ export default class PracticeCard extends React.Component {
               >
                 <H3>
                   {
-                    answer
+                    !answer
                       ? card.ques
                       : card.ans
                   }
