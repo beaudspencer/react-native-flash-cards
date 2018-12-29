@@ -174,7 +174,7 @@ export default class App extends React.Component {
               </H3>
               <CardPractice
                 update={this.updateIndex}
-                style={styles.container}
+                style={styles.practice}
                 cards={cards}
               />
               <H3
@@ -225,5 +225,8 @@ const styles = StyleSheet.create({
   text: {
     marginVertical: 16,
     alignSelf: 'center'
+  },
+  practice: {
+    height: 360
   }
 })

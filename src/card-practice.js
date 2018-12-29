@@ -74,6 +74,7 @@ export default class CardPractice extends React.Component {
                   }}
                 />
                 <ProgressBar
+                  style={styles.progress}
                   progress={this.state.progress}
                 />
               </React.Fragment>
@@ -108,5 +109,9 @@ const styles = StyleSheet.create({
   },
   center: {
     alignSelf: 'center'
+  },
+  progress: {
+    position: 'absolute',
+    marginBottom: 20
   }
 })
