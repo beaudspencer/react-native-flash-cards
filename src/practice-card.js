@@ -45,7 +45,7 @@ export default class PracticeCard extends React.Component {
               >
                 <H3>
                   {
-                    answer
+                    !answer
                       ? card.ques
                       : card.ans
                   }
@@ -63,12 +63,13 @@ const deviceWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   card: {
-    height: 240,
+    height: 210,
     flex: 1,
     justifyContent: 'center',
     width: '100%'
   },
   container: {
+    height: 220,
     width: deviceWidth
   },
   item: {

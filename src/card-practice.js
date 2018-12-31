@@ -11,18 +11,30 @@ import {
   DeckSwiper
 } from 'native-base'
 import PracticeCard from './practice-card'
+import ProgressBar from './progress-bar'
 
 export default class CardPractice extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      answer: false
+      answer: false,
+      progress: (1 / this.props.cards.length) * 100
     }
     this.flip = this.flip.bind(this)
+    this.calcPercent = this.calcPercent.bind(this)
   }
   flip() {
     this.setState({
       answer: !this.state.answer
+    })
+  }
+  calcPercent(card) {
+    const { cards } = this.props
+    const length = cards.length
+    const index = cards.findIndex(element => element.id === card.id)
+    const percent = ((index + 1) / length) * 100
+    this.setState({
+      progress: percent
     })
   }
   render() {
@@ -33,30 +45,40 @@ export default class CardPractice extends React.Component {
       >
         {
           cards.length >= 1
-            ? <DeckSwiper
-              dataSource={cards}
-              renderItem={item => {
-                return (
-                  <PracticeCard
-                    flip={this.flip}
-                    answer={this.state.answer}
-                    card={item}
-                  />
-                )
-              }}
-              onSwipeLeft={(card) => {
-                update(false, card)
-                this.setState({
-                  answer: false
-                })
-              }}
-              onSwipeRight={(card) => {
-                update(true, card)
-                this.setState({
-                  answer: false
-                })
-              }}
-            />
+            ? (
+              <React.Fragment>
+                <DeckSwiper
+                  dataSource={cards}
+                  renderItem={item => {
+                    return (
+                      <PracticeCard
+                        flip={this.flip}
+                        answer={this.state.answer}
+                        card={item}
+                      />
+                    )
+                  }}
+                  onSwipeLeft={(card) => {
+                    update(false, card)
+                    this.setState({
+                      answer: false
+                    })
+                    this.calcPercent(card)
+                  }}
+                  onSwipeRight={(card) => {
+                    update(true, card)
+                    this.setState({
+                      answer: false
+                    })
+                    this.calcPercent(card)
+                  }}
+                />
+                <ProgressBar
+                  style={styles.progress}
+                  progress={this.state.progress}
+                />
+              </React.Fragment>
+            )
             : (
               <Container
                 style={styles.container}
@@ -87,5 +109,9 @@ const styles = StyleSheet.create({
   },
   center: {
     alignSelf: 'center'
+  },
+  progress: {
+    position: 'absolute',
+    marginBottom: 20
   }
 })
